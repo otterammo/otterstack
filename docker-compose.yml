@@ -8,3 +8,8 @@ services:
     extends:
       file: core/cloudflared/docker-compose.yml
       service: cloudflared
+
+  jellyfin:
+    extends:
+      file: apps/jellyfin/docker-compose.yml
+      service: jellyfin

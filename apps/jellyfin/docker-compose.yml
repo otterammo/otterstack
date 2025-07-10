@@ -1,0 +1,23 @@
+networks:
+  homelab:
+    name: homelab
+    external: true
+
+services:
+  jellyfin:
+    image: jellyfin/jellyfin
+    container_name: jellyfin
+    env_file: ../../.env
+    ports:
+      - "8096:8096"
+    volumes:
+      - ./conf:/config
+      - ${MEDIA_PATH}:/media
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8096"]
+      interval: 30s
+      timeout: 5s
+      retries: 3
+    networks:
+      - homelab
