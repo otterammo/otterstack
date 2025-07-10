@@ -1,0 +1,10 @@
+networks:
+  homelab:
+    name: homelab
+    external: true
+
+services:
+  cloudflared:
+    extends:
+      file: core/cloudflared/docker-compose.yml
+      service: cloudflared

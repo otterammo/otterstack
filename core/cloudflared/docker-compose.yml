@@ -1,0 +1,15 @@
+networks:
+  homelab:
+    external: true
+
+services:
+  cloudflared:
+    image: cloudflare/cloudflared:latest
+    container_name: cloudflared
+    restart: unless-stopped
+    command: tunnel run
+    volumes:
+      - ./conf:/etc/cloudflared:ro
+      - ./conf/.cloudflared:/etc/cloudflared-creds:ro
+    networks:
+      - homelab
