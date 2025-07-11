@@ -1,0 +1,24 @@
+networks:
+  homelab:
+    name: homelab
+    external: true
+
+services:
+  sonarr:
+    image: linuxserver/sonarr
+    container_name: sonarr
+    env_file: ../../.env
+    ports:
+      - "8989:8989"
+    volumes:
+      - ./conf:/config
+      - ${MEDIA_PATH}/tv:/tv
+      - ${MEDIA_PATH}/downloads:/downloads
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8989"]
+      interval: 30s
+      timeout: 5s
+      retries: 3
+    networks:
+      - homelab

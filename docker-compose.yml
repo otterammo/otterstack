@@ -13,3 +13,8 @@ services:
     extends:
       file: apps/jellyfin/docker-compose.yml
       service: jellyfin
+
+  sonarr:
+    extends:
+      file: apps/sonarr/docker-compose.yml
+      service: sonarr
