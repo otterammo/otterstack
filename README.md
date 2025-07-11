@@ -31,3 +31,25 @@ To expose a new service under your Cloudflare Tunnel, follow these steps:
    ```bash
    curl -I https://<subdomain>.otterammo.xyz
    ```
+
+## Flushing the DNS Cache
+
+If you still see stale records:
+
+1. **Restart the resolver**
+  ```bash
+  sudo systemctl restart systemd-resolved
+  ```
+
+2. **Flush its cache**
+  ```bash
+  sudo resolvectl flush-caches
+  ```
+
+You can verify that the DNS cache has been cleared by checking the status of `systemd-resolved`:
+
+```bash
+sudo systemctl status systemd-resolved
+```
+
+Look for output indicating the cache size to confirm it has been reset.

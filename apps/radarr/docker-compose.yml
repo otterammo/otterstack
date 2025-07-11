@@ -1,0 +1,24 @@
+networks:
+  homelab:
+    name: homelab
+    external: true
+
+services:
+  radarr:
+    image: linuxserver/radarr
+    container_name: radarr
+    env_file: ../../.env
+    ports:
+      - "7878:7878"
+    volumes:
+      - ./conf:/config
+      - ${MEDIA_PATH}/movies:/movies
+      - ${MEDIA_PATH}/downloads:/downloads
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:7878"]
+      interval: 30s
+      timeout: 5s
+      retries: 3
+    networks:
+      - homelab
