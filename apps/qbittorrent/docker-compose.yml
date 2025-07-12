@@ -1,0 +1,19 @@
+networks:
+  homelab:
+    external: true
+
+services:
+  qbittorrent:
+    image: linuxserver/qbittorrent
+    container_name: qbittorrent
+    env_file: .env
+    volumes:
+      - ./conf:/config
+      - ${MEDIA_PATH}/downloads:/downloads
+    ports:
+      - 6881:6881
+      - 6881:6881/udp
+      - 8080:8080
+    restart: unless-stopped
+    networks:
+      - homelab

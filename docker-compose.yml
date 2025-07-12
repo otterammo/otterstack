@@ -28,3 +28,8 @@ services:
     extends:
       file: apps/servarr/docker-compose.yml
       service: prowlarr
+
+  qbittorrent:
+    extends:
+      file: apps/qbittorrent/docker-compose.yml
+      service: qbittorrent
