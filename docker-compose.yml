@@ -16,10 +16,10 @@ services:
 
   sonarr:
     extends:
-      file: apps/sonarr/docker-compose.yml
+      file: apps/servarr/docker-compose.yml
       service: sonarr
 
   radarr:
     extends:
-      file: apps/radarr/docker-compose.yml
+      file: apps/servarr/docker-compose.yml
       service: radarr
