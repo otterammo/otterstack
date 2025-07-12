@@ -43,3 +43,8 @@ services:
     extends:
       file: apps/plex/docker-compose.yml
       service: plex
+
+  jackett:
+    extends:
+      file: apps/jackett/docker-compose.yml
+      service: jackett

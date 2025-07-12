@@ -1,0 +1,16 @@
+networks:
+  homelab:
+    external: true
+
+services:
+  jackett:
+    image: lscr.io/linuxserver/jackett:latest
+    container_name: jackett
+    env_file: .env
+    volumes:
+      - ./conf:/config
+    ports:
+      - 9117:9117
+    restart: unless-stopped
+    networks:
+      - homelab
