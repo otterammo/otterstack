@@ -1,4 +1,4 @@
-.PHONY: newtork up down logs restart status healthcheck
+.PHONY: newtork up down logs restart status health
 
 network:
 	docker network create homelab
@@ -18,5 +18,5 @@ restart:
 status:
 	docker compose -f docker-compose.yml ps
 
-healthcheck:
+health:
 	docker ps --format "table {{.Names}}\t{{.Status}}\t{{.Image}}"

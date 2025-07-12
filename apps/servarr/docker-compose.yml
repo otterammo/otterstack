@@ -41,3 +41,21 @@ services:
       retries: 3
     networks:
       - homelab
+
+  prowlarr:
+    image: linuxserver/prowlarr
+    container_name: prowlarr
+    env_file: .env
+    ports:
+      - "9696:9696"
+    volumes:
+      - ./prowlarr/conf:/config
+      - ${MEDIA_PATH}/downloads:/downloads
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:9696"]
+      interval: 30s
+      timeout: 5s
+      retries: 3
+    networks:
+      - homelab

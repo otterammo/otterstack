@@ -23,3 +23,8 @@ services:
     extends:
       file: apps/servarr/docker-compose.yml
       service: radarr
+
+  prowlarr:
+    extends:
+      file: apps/servarr/docker-compose.yml
+      service: prowlarr
