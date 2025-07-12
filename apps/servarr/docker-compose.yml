@@ -59,3 +59,23 @@ services:
       retries: 3
     networks:
       - homelab
+
+  bazarr:
+    image: linuxserver/bazarr:latest
+    container_name: bazarr
+    env_file: .env
+    ports:
+      - "6767:6767"
+    volumes:
+      - ./bazarr/conf:/config
+      - ${MEDIA_PATH}/movies:/movies
+      - ${MEDIA_PATH}/tv:/tv
+      - ${MEDIA_PATH}/downloads:/downloads
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:6767"]
+      interval: 30s
+      timeout: 5s
+      retries: 3
+    networks:
+      - homelab
