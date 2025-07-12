@@ -49,6 +49,11 @@ services:
       file: apps/plex/docker-compose.yml
       service: plex
 
+  tautulli:
+    extends:
+      file: apps/tautulli/docker-compose.yml
+      service: tautulli
+
   jackett:
     extends:
       file: apps/jackett/docker-compose.yml

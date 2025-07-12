@@ -1,0 +1,21 @@
+networks:
+  homelab:
+    external: true
+
+services:
+  tautulli:
+    image: lscr.io/linuxserver/tautulli:latest
+    container_name: tautulli
+    env_file: .env
+    volumes:
+      - ./conf:/config
+    restart: unless-stopped
+    ports:
+      - "8181:8181"
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8181"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+    networks:
+      - homelab
