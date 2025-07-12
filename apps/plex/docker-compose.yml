@@ -9,17 +9,14 @@ services:
     env_file: .env
     volumes:
       - ./conf:/config
-      - ${MEDIA_PATH}/tv:/tv
-      - ${MEDIA_PATH}/movies:/movies
-    ports:
-      - 32400:32400
-      - 32469:32469
-      - 1900:1900/udp
-      - 3005:3005
-      - 8324:8324
-      - 32410:32410/udp
-      - 32412:32412/udp
-      - 32413:32413/udp
+      - ${MEDIA_PATH}:/media
     restart: unless-stopped
+    ports:
+      - "32400:32400"
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:32400/web"]
+      interval: 30s
+      timeout: 5s
+      retries: 3
     networks:
       - homelab
