@@ -33,3 +33,8 @@ services:
     extends:
       file: apps/qbittorrent/docker-compose.yml
       service: qbittorrent
+
+  plex:
+    extends:
+      file: apps/plex/docker-compose.yml
+      service: plex
