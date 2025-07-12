@@ -1,0 +1,21 @@
+networks:
+  homelab:
+    external: true
+
+services:
+  wireguard:
+    image: linuxserver/wireguard
+    container_name: wireguard
+    cap_add:
+      - NET_ADMIN
+      - SYS_MODULE
+    env_file: .env
+    volumes:
+      - ./conf:/config
+    ports:
+      - 51820:51820/udp
+    sysctls:
+      - net.ipv4.conf.all.src_valid_mark=1
+    restart: unless-stopped
+    networks:
+      - homelab

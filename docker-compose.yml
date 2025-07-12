@@ -9,6 +9,11 @@ services:
       file: core/cloudflared/docker-compose.yml
       service: cloudflared
 
+  wireguard:
+    extends:
+      file: core/wireguard/docker-compose.yml
+      service: wireguard
+
   jellyfin:
     extends:
       file: apps/jellyfin/docker-compose.yml
