@@ -1,55 +1,72 @@
 # Homelab
 
-## Registering a New Subdomain
+A simple, modular homelab repository to run media, download, and networking services together.
 
-To expose a new service under your Cloudflare Tunnel, follow these steps:
+## Repository Layout
 
-1. **Edit the ingress rules**
-   Open `core/cloudflared/conf/config.yml` and add an entry under `ingress:`:
-   ```yaml
-   - hostname: <subdomain>.otterammo.xyz
-     service: http://<service_container_name>:<port>
-   ```
-   Replace `<subdomain>`, `<service_container_name>`, and `<port>` with your values.
-
-2. **Create the DNS record**
-   Run:
-   ```bash
-   docker run --rm \
-     -v ~/homelab/core/cloudflared/conf:/etc/cloudflared:ro \
-     cloudflare/cloudflared:latest \
-     tunnel route dns homelab <subdomain>.otterammo.xyz
-   ```
-
-3. **Restart the tunnel**
-   ```bash
-   cd ~/homelab/core/cloudflared
-   docker compose restart cloudflared
-   ```
-
-4. **Verify**
-   ```bash
-   curl -I https://<subdomain>.otterammo.xyz
-   ```
-
-## Flushing the DNS Cache
-
-If you still see stale records:
-
-1. **Restart the resolver**
-  ```bash
-  sudo systemctl restart systemd-resolved
-  ```
-
-2. **Flush its cache**
-  ```bash
-  sudo resolvectl flush-caches
-  ```
-
-You can verify that the DNS cache has been cleared by checking the status of `systemd-resolved`:
-
-```bash
-sudo systemctl status systemd-resolved
+```
+homelab/
+├── apps/               # Individual application stacks
+│   ├── jellyfin/
+│   ├── plex/
+│   ├── servarr/
+│   │   ├── sonarr/
+│   │   ├── radarr/
+│   │   ├── prowlarr/
+│   │   └── bazarr/
+│   ├── qbittorrent/
+│   └── jackett/
+├── core/               # Core infrastructure services
+│   ├── cloudflared/
+│   └── wireguard/
+└── README.md           # This overview
 ```
 
-Look for output indicating the cache size to confirm it has been reset.
+## Applications
+
+- **Jellyfin**: Self-hosted media server for movies, TV, music.
+- **Plex**: Alternative media server with native app support.
+- **Sonarr**: TV series download automation.
+- **Radarr**: Movie download automation.
+- **Prowlarr**: Indexer manager for Sonarr/Radarr.
+- **Bazarr**: Subtitle management for media.
+- **qBittorrent**: Torrent client for automated downloads.
+- **Jackett**: Torznab indexer proxy.
+
+Each app lives in its own folder under `apps/` with its own `docker-compose.yml` and `.env`. See `apps/<app>/README.md` for details.
+
+## Core Services
+
+- **Cloudflared**: Cloudflare Tunnel to expose services securely.
+- **WireGuard**: VPN server for secure access to the homelab network.
+
+Core folders under `core/` contain their own compose files and configuration.
+
+## Getting Started
+
+1. **Prerequisites**
+   - Docker & Docker Compose installed on the host
+   - Membership of the Docker group (or use `sudo`)
+
+2. **Bring up all services**
+   At the repo root:
+   ```bash
+   docker compose up -d
+   ```
+
+3. **Stopping services**
+   ```bash
+   docker compose down
+   ```
+
+4. **Logs & Healthchecks**
+   - View logs: `docker compose logs -f`
+   - Check status: `docker ps --format "table {{.Names}}\t{{.Status}}\t{{.Ports}}"`
+
+## Adding New Apps or Subdomains
+
+1. Create a new folder under `apps/` with a `docker-compose.yml` and `.env`.
+2. Connect it to the `homelab` network.
+3. Add a proxy route (Cloudflared or Nginx) pointing to the service port.
+4. Document the details in `apps/<new-app>/README.md`.
+
