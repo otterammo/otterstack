@@ -4,7 +4,7 @@ networks:
 
 services:
   plex:
-    image: linuxserver/plex
+    image: lscr.io/linuxserver/plex:latest
     container_name: plex
     env_file: .env
     volumes:

@@ -5,9 +5,9 @@ networks:
 
 services:
   jellyfin:
-    image: jellyfin/jellyfin
+    image: jellyfin/jellyfin:latest
     container_name: jellyfin
-    env_file: ../../.env
+    env_file: .env
     ports:
       - "8096:8096"
     volumes:

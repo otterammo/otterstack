@@ -5,7 +5,7 @@ networks:
 
 services:
   sonarr:
-    image: linuxserver/sonarr
+    image: lscr.io/linuxserver/sonarr:latest
     container_name: sonarr
     env_file: .env
     ports:
@@ -24,7 +24,7 @@ services:
       - homelab
 
   radarr:
-    image: linuxserver/radarr
+    image: lscr.io/linuxserver/radarr:latest
     container_name: radarr
     env_file: .env
     ports:
@@ -43,7 +43,7 @@ services:
       - homelab
 
   prowlarr:
-    image: linuxserver/prowlarr
+    image: lscr.io/linuxserver/prowlarr:latest
     container_name: prowlarr
     env_file: .env
     ports:
@@ -61,7 +61,7 @@ services:
       - homelab
 
   bazarr:
-    image: linuxserver/bazarr:latest
+    image: lscr.io/linuxserver/bazarr:latest
     container_name: bazarr
     env_file: .env
     ports:
