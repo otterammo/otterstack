@@ -9,6 +9,11 @@ services:
       file: core/cloudflared/docker-compose.yml
       service: cloudflared
 
+  heimdall:
+    extends:
+      file: core/heimdall/docker-compose.yml
+      service: heimdall
+
   netdata:
     extends:
       file: core/netdata/docker-compose.yml

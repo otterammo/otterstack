@@ -1,0 +1,16 @@
+networks:
+  homelab:
+    external: true
+
+services:
+  heimdall:
+    image: lscr.io/linuxserver/heimdall:latest
+    container_name: heimdall
+    env_file: .env
+    volumes:
+      - ./conf:/config
+    ports:
+      - 8082:80
+    networks:
+      - homelab
+    restart: unless-stopped
