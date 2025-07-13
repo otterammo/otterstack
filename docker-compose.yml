@@ -29,6 +29,11 @@ services:
       file: apps/jellyfin/docker-compose.yml
       service: jellyfin
 
+  jellyseerr:
+    extends:
+      file: apps/jellyseerr/docker-compose.yml
+      service: jellyseerr
+
   sonarr:
     extends:
       file: apps/servarr/docker-compose.yml
