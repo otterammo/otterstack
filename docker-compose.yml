@@ -9,6 +9,11 @@ services:
       file: core/cloudflared/docker-compose.yml
       service: cloudflared
 
+  netdata:
+    extends:
+      file: core/netdata/docker-compose.yml
+      service: netdata
+
   wireguard:
     extends:
       file: core/wireguard/docker-compose.yml

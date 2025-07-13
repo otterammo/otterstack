@@ -1,7 +1,9 @@
 .env
-**/conf/
+cache/
+conf/
 compose/
 internal/
+lib/
 *.log
 *.tmp
 *.bak

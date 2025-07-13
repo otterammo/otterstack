@@ -1,0 +1,33 @@
+networks:
+  homelab:
+    external: true
+
+services:
+  netdata:
+    image: netdata/netdata:latest
+    container_name: netdata
+    env_file: .env
+    cap_add:
+      - SYS_PTRACE      # required for system tracing
+      - NET_RAW         # for packet collection
+    security_opt:
+      - apparmor:unconfined
+    ports:
+      - "19999:19999"
+    volumes:
+      - ./conf/netdata:/etc/netdata
+      - ./lib/netdata:/var/lib/netdata
+      - ./cache/netdata:/var/cache/netdata
+      - /:/host/root:ro,rslave
+      - /etc/passwd:/host/etc/passwd:ro
+      - /etc/group:/host/etc/group:ro
+      - /etc/localtime:/etc/localtime:ro
+      - /proc:/host/proc:ro
+      - /sys:/host/sys:ro
+      - /etc/os-release:/host/etc/os-release:ro
+      - /var/log:/host/var/log:ro
+      - /var/run/docker.sock:/var/run/docker.sock:ro
+      - /run/dbus:/run/dbus:ro
+    restart: unless-stopped
+    networks:
+      - homelab
