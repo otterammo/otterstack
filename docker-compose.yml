@@ -14,6 +14,11 @@ services:
       file: core/heimdall/docker-compose.yml
       service: heimdall
 
+  monit:
+    extends:
+      file: core/monit/docker-compose.yml
+      service: monit
+
   netdata:
     extends:
       file: core/netdata/docker-compose.yml
@@ -23,6 +28,11 @@ services:
     extends:
       file: core/wireguard/docker-compose.yml
       service: wireguard
+
+  jackett:
+    extends:
+      file: apps/jackett/docker-compose.yml
+      service: jackett
 
   jellyfin:
     extends:
@@ -34,42 +44,37 @@ services:
       file: apps/jellyseerr/docker-compose.yml
       service: jellyseerr
 
-  sonarr:
+  plex:
     extends:
-      file: apps/servarr/docker-compose.yml
-      service: sonarr
-
-  radarr:
-    extends:
-      file: apps/servarr/docker-compose.yml
-      service: radarr
-
-  prowlarr:
-    extends:
-      file: apps/servarr/docker-compose.yml
-      service: prowlarr
-
-  bazarr:
-    extends:
-      file: apps/servarr/docker-compose.yml
-      service: bazarr
+      file: apps/plex/docker-compose.yml
+      service: plex
 
   qbittorrent:
     extends:
       file: apps/qbittorrent/docker-compose.yml
       service: qbittorrent
 
-  plex:
+  bazarr:
     extends:
-      file: apps/plex/docker-compose.yml
-      service: plex
+      file: apps/servarr/docker-compose.yml
+      service: bazarr
+
+  prowlarr:
+    extends:
+      file: apps/servarr/docker-compose.yml
+      service: prowlarr
+
+  radarr:
+    extends:
+      file: apps/servarr/docker-compose.yml
+      service: radarr
+
+  sonarr:
+    extends:
+      file: apps/servarr/docker-compose.yml
+      service: sonarr
 
   tautulli:
     extends:
       file: apps/tautulli/docker-compose.yml
       service: tautulli
-
-  jackett:
-    extends:
-      file: apps/jackett/docker-compose.yml
-      service: jackett

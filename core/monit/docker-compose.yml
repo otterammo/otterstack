@@ -1,0 +1,19 @@
+networks:
+  homelab:
+    external: true
+
+services:
+  monit:
+    image: lscr.io/linuxserver-labs/monit:latest
+    container_name: monit
+    env_file: .env
+    volumes:
+      - ./conf:/config
+      - ./conf/monitrc:/etc/monitrc:ro
+      - ./actions:/config/actions:ro
+      - ${MEDIA_PATH}:/media:ro
+      - /var/run/docker.sock:/var/run/docker.sock
+      - /usr/bin/docker:/usr/bin/docker:ro
+    restart: unless-stopped
+    networks:
+      - homelab
