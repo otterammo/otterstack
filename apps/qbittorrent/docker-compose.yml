@@ -6,7 +6,7 @@ networks:
 
 services:
   qbittorrent:
-    image: linuxserver/qbittorrent
+    image: lscr.io/linuxserver/qbittorrent:latest
     container_name: qbittorrent
     env_file: .env
     volumes:
