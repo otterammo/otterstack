@@ -1,4 +1,4 @@
-# Otterstack
+![otterstack](https://github.com/otterammo/otterstack/blob/main/assets/otterstack.png?raw=true)
 
 A simple, modular homelab repository to run media, download, and networking services together.
 
