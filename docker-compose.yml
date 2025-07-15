@@ -49,6 +49,11 @@ services:
       file: apps/jellyseerr/docker-compose.yml
       service: jellyseerr
 
+  pairdrop:
+    extends:
+      file: apps/pairdrop/docker-compose.yml
+      service: pairdrop
+
   plex:
     extends:
       file: apps/plex/docker-compose.yml

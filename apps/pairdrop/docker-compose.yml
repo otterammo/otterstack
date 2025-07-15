@@ -1,0 +1,16 @@
+networks:
+  homelab:
+    name: homelab
+    external: true
+
+services:
+  pairdrop:
+    image: lscr.io/linuxserver/pairdrop:latest
+    container_name: pairdrop
+    env_file: .env
+    ports:
+      - 3000:3000
+    volumes:
+      - ./conf:/config
+    networks:
+      - homelab
