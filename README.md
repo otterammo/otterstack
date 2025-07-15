@@ -1,4 +1,4 @@
-# Homelab
+# Otterstack
 
 A simple, modular homelab repository to run media, download, and networking services together.
 
