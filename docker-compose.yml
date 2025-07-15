@@ -24,6 +24,11 @@ services:
       file: core/netdata/docker-compose.yml
       service: netdata
 
+  organizr:
+    extends:
+      file: core/organizr/docker-compose.yml
+      service: organizr
+
   wireguard:
     extends:
       file: core/wireguard/docker-compose.yml

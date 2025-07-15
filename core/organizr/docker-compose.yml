@@ -1,0 +1,21 @@
+networks:
+  homelab:
+    external: true
+
+services:
+  organizr:
+    image: ghcr.io/organizr/organizr:latest
+    container_name: organizr
+    env_file: .env
+    ports:
+      - "80:80"
+    volumes:
+      - ./conf:/config
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost/"]
+      interval: 1m
+      timeout: 10s
+      retries: 3
+    networks:
+      - homelab
