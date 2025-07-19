@@ -5,7 +5,7 @@ networks:
 
 services:
   jellyfin:
-    image: jellyfin/jellyfin:latest
+    image: lscr.io/linuxserver/jellyfin:latest
     container_name: jellyfin
     env_file: .env
     ports:
