@@ -4,6 +4,7 @@ conf/
 compose/
 internal/
 lib/
+nginx/
 *.log
 *.tmp
 *.bak
