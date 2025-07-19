@@ -39,6 +39,11 @@ services:
       file: core/wireguard/docker-compose.yml
       service: wireguard
 
+  filebrowser:
+    extends:
+      file: apps/filebrowser/docker-compose.yml
+      service: filebrowser
+
   jackett:
     extends:
       file: apps/jackett/docker-compose.yml

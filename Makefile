@@ -1,4 +1,4 @@
-.PHONY: newtork up down logs restart status health
+.PHONY: newtork up down logs restart status health ports
 
 network:
 	docker network create homelab
@@ -20,3 +20,6 @@ status:
 
 health:
 	docker ps --format "table {{.Names}}\t{{.Status}}\t{{.Image}}"
+
+ports:
+	docker ps --format "table {{.Image}}\t{{.Ports}}"

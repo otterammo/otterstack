@@ -1,0 +1,18 @@
+networks:
+  homelab:
+    external: true
+
+services:
+  filebrowser:
+    image: filebrowser/filebrowser:latest
+    container_name: filebrowser
+    env_file: .env
+    volumes:
+      - ~/media-stack/media:/srv
+      - ./conf/database:/database
+      - ./conf/config:/config
+    ports:
+      - "8084:8084"
+    restart: unless-stopped
+    networks:
+      - homelab
