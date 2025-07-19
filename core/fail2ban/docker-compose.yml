@@ -1,0 +1,21 @@
+networks:
+  homelab:
+    external: true
+
+services:
+  fail2ban:
+    image: lscr.io/linuxserver/fail2ban:latest
+    container_name: fail2ban
+    cap_add:
+      - NET_ADMIN
+      - NET_RAW
+    env_file: .env
+    volumes:
+      - ./conf:/config
+      - /var/log:/var/log
+      - ../../apps/servarr/prowlarr/conf/logs:/remotelogs/prowlarr:ro
+      - ../../apps/servarr/radarr/conf/logs:/remotelogs/radarr:ro
+      - ../../apps/servarr/sonarr/conf/logs:/remotelogs/sonarr:ro
+    restart: unless-stopped
+    networks:
+      - homelab

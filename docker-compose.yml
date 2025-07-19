@@ -9,6 +9,11 @@ services:
       file: core/cloudflared/docker-compose.yml
       service: cloudflared
 
+  fail2ban:
+    extends:
+      file: core/fail2ban/docker-compose.yml
+      service: fail2ban
+
   heimdall:
     extends:
       file: core/heimdall/docker-compose.yml
