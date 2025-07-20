@@ -10,7 +10,7 @@ services:
     volumes:
       - ~/media-stack/media:/srv
       - ./conf/database:/database
-      - ./conf/config:/config
+      - ./conf/log:/log
     ports:
       - "8084:8084"
     restart: unless-stopped
