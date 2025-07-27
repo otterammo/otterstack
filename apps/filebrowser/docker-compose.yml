@@ -8,7 +8,7 @@ services:
     container_name: filebrowser
     env_file: .env
     volumes:
-      - ~/media-stack/media:/srv
+      - ${MEDIA_PATH}:/srv
       - ./conf/database:/database
       - ./conf/log:/log
     ports:
