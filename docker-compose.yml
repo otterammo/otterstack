@@ -9,6 +9,16 @@ services:
       file: core/cloudflared/docker-compose.yml
       service: cloudflared
 
+  dozzle:
+    extends:
+      file: core/dozzle/docker-compose.yml
+      service: dozzle
+
+  dozzle-agent:
+    extends:
+      file: core/dozzle/docker-compose.yml
+      service: dozzle-agent
+
   fail2ban:
     extends:
       file: core/fail2ban/docker-compose.yml
