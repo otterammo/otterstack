@@ -84,6 +84,16 @@ services:
       file: apps/qbittorrent/docker-compose.yml
       service: qbittorrent
 
+  searxng:
+    extends:
+      file: apps/searxng/docker-compose.yml
+      service: searxng
+
+  redis:
+    extends:
+      file: apps/searxng/docker-compose.yml
+      service: redis
+
   bazarr:
     extends:
       file: apps/servarr/docker-compose.yml

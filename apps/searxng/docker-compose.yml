@@ -1,0 +1,30 @@
+networks:
+  homelab:
+    name: homelab
+    external: true
+
+services:
+  redis:
+    image: redis:7-alpine
+    container_name: searxng-redis
+    command: ["redis-server", "--save", "", "--appendonly", "no"]
+    restart: unless-stopped
+    networks:
+      - homelab
+
+  searxng:
+    image: searxng/searxng:latest
+    container_name: searxng
+    env_file: .env
+    volumes:
+      - ./conf:/etc/searxng
+    depends_on:
+      - redis
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "wget", "--spider", "-q", "http://localhost:8080/"]
+      interval: 30s
+      timeout: 5s
+      retries: 3
+    networks:
+      - homelab
