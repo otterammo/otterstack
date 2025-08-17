@@ -114,6 +114,11 @@ services:
       file: apps/servarr/docker-compose.yml
       service: sonarr
 
+  subgenai:
+    extends:
+      file: apps/subgen/docker-compose.yml
+      service: subgenai
+
   tautulli:
     extends:
       file: apps/tautulli/docker-compose.yml

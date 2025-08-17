@@ -1,0 +1,20 @@
+networks:
+  homelab:
+    name: homelab
+    external: true
+
+services:
+  subgenai:
+    depends_on:
+      bazarr:
+        condition: service_healthy
+    image: mccloud/subgen:cpu
+    container_name: subgenai
+    volumes:
+       - ./conf/models:/subgen/models
+       - ./conf/subgen.env:/subgen/subgen.env:ro
+       - ${MEDIA_PATH}/tv:/tv
+       - ${MEDIA_PATH}/movies:/movies
+    env_file: .env
+    networks:
+      - homelab
